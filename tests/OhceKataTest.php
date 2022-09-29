@@ -10,16 +10,46 @@ use PHPUnit\Framework\TestCase;
 
 final class OhceKataTest extends TestCase
 {
+    public OhceKata $ohce;
+
+    /**
+     * @setUp
+     **/
+    protected function setUp():void
+    {
+        parent::setUp();
+
+        $this->ohce = new OhceKata("Pedro");
+    }
+
     /**
      * @test
      **/
-    public function given_one_word_returns_reverse_word()
+    public function given_one_word_if_is_palindrome_returns_pretty_word()
     {
-        $ohce = new OhceKata();
+        $result = $this->ohce->execute('somos');
 
-        $result = $ohce->reverse('hello');
+        $this->assertEquals("somos ¡Bonita palabra!",$result);
+    }
 
-        $this->assertEquals("olleh",$result);
+    /**
+     * @test
+     **/
+    public function given_oche_rule_returns_goodmorning()
+    {
+        $result = $this->ohce->execute('ohce');
+
+        $this->assertEquals("¡Buenos dias Pedro!",$result);
+    }
+
+    /**
+     * @test
+     **/
+    public function given_stop_rule_returns_a_goodbye()
+    {
+        $result = $this->ohce->execute('Stop!');
+
+        $this->assertEquals("Adios Pedro",$result);
     }
 
 
